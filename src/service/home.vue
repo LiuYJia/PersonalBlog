@@ -52,11 +52,14 @@
 
             </div>
         </div>
+        <footers />
     </div>
 </template>
 <script>
+import footers from '@/components/footers.vue';
 import homeapi from '../api/home.js'
 export default {
+    components:{footers},
     data(){
         return{
             oneArr:[],
@@ -126,9 +129,7 @@ export default {
 <style>
     .home{
         height: calc(100% - 61px);
-    }
-    .home .el-divider--horizontal{
-        margin:12px 0;
+        overflow: auto;
     }
     .home .blockTitle{
         margin-right: 20px;
@@ -143,16 +144,6 @@ export default {
     .home .boxContainer{
         padding: 0px 25px;
     }
-    .home .contentBox{
-        height: 100%;
-        overflow: auto;
-    }
-    .home .contentLeft{
-        padding: 20px 5%;
-    }
-    .home  .contentRight{
-        padding: 20px 5%;
-    }
     .oneBlock,.articleBlock,.positionBlock,.msgBlock{
         padding-top: 10px;
     }
@@ -165,15 +156,6 @@ export default {
         margin: 5px 10px;
     }
     @media all and (min-width:768px){
-        .home .contentBox{
-            display: flex;
-        }
-        .home .contentLeft{
-            flex: 2;
-        }
-        .home .contentRight{
-            flex: 1;
-        }
         .home .el-carousel__container{
             height: 200px;
         }

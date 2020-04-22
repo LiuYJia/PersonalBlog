@@ -1,9 +1,9 @@
 <template>
     <div class="headers">
-        <div class="headers-title">
+        <div class="headers-title" v-if="!showTitle">
             Blog
         </div>
-        <div class="headers-bigNav">
+        <div class="headers-bigNav" v-if="!showTitle">
             <el-menu
                 :default-active="activeIndex"
                 class="el-menu-demo"
@@ -17,7 +17,7 @@
                 <el-menu-item index="5">留言板</el-menu-item>
             </el-menu>
         </div>
-        <div class="headers-smallNav">
+        <div class="headers-smallNav" v-if="!showTitle">
             <el-button class="el-icon-menu" @click="showSmallMenu=!showSmallMenu"></el-button>
             <el-collapse-transition>
                 <div v-show="showSmallMenu" class="headers-smallMenu">
@@ -35,6 +35,10 @@
                 </div>
             </el-collapse-transition>
         </div>
+
+        <div v-if="!showTitle">
+            {{titleText}}
+        </div>
     </div>
 </template>
 <script>
@@ -49,9 +53,6 @@ export default {
     },
     methods:{
         handleSelect(index){
-            if(this.activeIndex==index){
-                return
-            }
             if(index==1){
                 this.$router.push({
                     path:'/',

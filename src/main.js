@@ -7,7 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.config.productionTip = false
-
+Vue.prototype.showTitle = false
+Vue.prototype.titleText = ''
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
