@@ -23,8 +23,7 @@ html,body,#app{
   margin: 0;
 }
 .contentBox{
-  height: 100%;
-  overflow: auto;
+  min-height: calc(100% - 61px);
 }
 .contentBox .contentLeft{
   padding: 20px 5%;

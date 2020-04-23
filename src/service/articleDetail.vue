@@ -2,8 +2,8 @@
     <div class="articleDetail">
         <div class="contentBox">
             <div class="contentLeft">
-                <div class="articleDetail-title">
-                    标题标题标题标题标题标题标题标题标题标题
+                <div class="articleDetail-title" ref="articleTitle">
+                    哈哈哈哈哈啊哈哈哈哈哈哈哈啊哈哈啊哈哈哈哈哈哈哈啊哈哈
                 </div>
                 <div class="articleDetail-author">
                     <i class="el-icon-postcard"></i>
@@ -48,20 +48,20 @@ export default {
         }
     },
     created(){
-        console.log(this.showTitle)
+
     },
     mounted(){
+        var _height = window.getComputedStyle(this.$refs.articleTitle).height.slice(0,-2)
         var that = this;
         window.addEventListener('scroll', function(e){
-            var x= document.getElementsByClassName('contentBox')[0].scrollTop
-            if(x >= 50){
-                that.showTitle = true
-                that.titleText = 'sadasdasda'
+            var _scrollTop = document.getElementsByClassName('articleDetail')[0].scrollTop
+            if(_scrollTop > Number(_height) + 15){
+                that.$set(that.$headersObj, 'isShowTitle', true)
+                that.$set(that.$headersObj, 'titleText', 'aaa')
             }else{
-                that.showTitle = false
-                that.titleText = ''
+                that.$set(that.$headersObj, 'isShowTitle', false)
+                that.$set(that.$headersObj, 'titleText', '')
             }
-            console.log(that.showTitle)
         },true)
     },
     methods:{

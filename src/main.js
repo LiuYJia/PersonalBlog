@@ -8,7 +8,15 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.showTitle = false
-Vue.prototype.titleText = ''
+
+var vm = new Vue({
+  data:{
+    isShowTitle:false,
+    titleText:''
+  }
+})
+Vue.prototype.$headersObj = vm
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,43 +1,45 @@
 <template>
     <div class="headers">
-        <div class="headers-title" v-if="!showTitle">
-            Blog
+        <div class="headers-top">
+            <div :class="{'headers-logo':true,'headers-toppic':$headersObj.isShowTitle}">
+                Blog
+            </div>
+            <div :class="{'headers-bigNav':true,'headers-toppic':$headersObj.isShowTitle}">
+                <el-menu
+                    :default-active="activeIndex"
+                    class="el-menu-demo"
+                    mode="horizontal"
+                    @select="handleSelect"
+                    active-text-color="#409EFF">
+                    <el-menu-item index="1">首页</el-menu-item>
+                    <el-menu-item index="2">导航2</el-menu-item>
+                    <el-menu-item index="3">导航3</el-menu-item>
+                    <el-menu-item index="4">导航4</el-menu-item>
+                    <el-menu-item index="5">留言板</el-menu-item>
+                </el-menu>
+            </div>
+            <div  :class="{'headers-smallNav':true,'headers-toppic':$headersObj.isShowTitle}">
+                <el-button class="el-icon-menu" @click="showSmallMenu=!showSmallMenu"></el-button>
+                <el-collapse-transition>
+                    <div v-show="showSmallMenu" class="headers-smallMenu">
+                        <el-menu
+                            :default-active="activeIndex"
+                            class="el-menu-demo"
+                            @select="handleSelect"
+                            active-text-color="#409EFF">
+                            <el-menu-item index="1">首页</el-menu-item>
+                            <el-menu-item index="2">导航2</el-menu-item>
+                            <el-menu-item index="3">导航3</el-menu-item>
+                            <el-menu-item index="4">导航4</el-menu-item>
+                            <el-menu-item index="5">留言板</el-menu-item>
+                        </el-menu>
+                    </div>
+                </el-collapse-transition>
+            </div>
         </div>
-        <div class="headers-bigNav" v-if="!showTitle">
-            <el-menu
-                :default-active="activeIndex"
-                class="el-menu-demo"
-                mode="horizontal"
-                @select="handleSelect"
-                active-text-color="#409EFF">
-                <el-menu-item index="1">首页</el-menu-item>
-                <el-menu-item index="2">导航2</el-menu-item>
-                <el-menu-item index="3">导航3</el-menu-item>
-                <el-menu-item index="4">导航4</el-menu-item>
-                <el-menu-item index="5">留言板</el-menu-item>
-            </el-menu>
-        </div>
-        <div class="headers-smallNav" v-if="!showTitle">
-            <el-button class="el-icon-menu" @click="showSmallMenu=!showSmallMenu"></el-button>
-            <el-collapse-transition>
-                <div v-show="showSmallMenu" class="headers-smallMenu">
-                    <el-menu
-                        :default-active="activeIndex"
-                        class="el-menu-demo"
-                        @select="handleSelect"
-                        active-text-color="#409EFF">
-                        <el-menu-item index="1">首页</el-menu-item>
-                        <el-menu-item index="2">导航2</el-menu-item>
-                        <el-menu-item index="3">导航3</el-menu-item>
-                        <el-menu-item index="4">导航4</el-menu-item>
-                        <el-menu-item index="5">留言板</el-menu-item>
-                    </el-menu>
-                </div>
-            </el-collapse-transition>
-        </div>
-
-        <div v-if="!showTitle">
-            {{titleText}}
+        
+        <div :class="{'headers-drop':true,'headers-droppic':$headersObj.isShowTitle}">
+            标题标题标题标题标题标题标题标题标题标
         </div>
     </div>
 </template>
@@ -74,17 +76,35 @@ export default {
     .headers{
         height: 60px;
         border-bottom: 1px solid #e6e6e6;
+        overflow: hidden;
     }
-    .headers-title{
+    .headers-top{
+        height: 60px;
+    }
+    .headers-logo{
         float: left;
         text-align: center;
         line-height: 60px;
         margin-left: 5%;
+        position: relative;
+        transition: top .5s;
+        top: 0;
+    }
+    .headers-drop{
+        width: 90%;
+        margin: 0 auto;
+        line-height: 60px;
+        position: relative;
+        top: 0px;
+        transition: top .3s;
     }
     @media all and (min-width:768px){
         .headers-bigNav{
             margin-right: 5%;
             float: right;
+            position: relative;
+            transition: top .5s;
+            top: 0;
         }
         .headers-smallNav{
             display: none;
@@ -99,13 +119,20 @@ export default {
             margin-right: 5%;
             line-height: 60px;
             float: right;
+            position: relative;
+            transition: top .5s;
+            top: 0;
         }
         .headers-smallMenu{
             border: 1px solid #e6e6e6;
-            position: absolute;
+            position: fixed;
             right: 5%;
-            z-index: 99;
         }
     }
-
+    .headers-toppic,.headers-droppic{
+        top: -60px;
+    }
+    .el-menu.el-menu--horizontal{
+        border: none;
+    }
 </style>
