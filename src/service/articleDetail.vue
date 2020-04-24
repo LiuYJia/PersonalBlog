@@ -3,30 +3,18 @@
         <div class="contentBox">
             <div class="contentLeft">
                 <div class="articleDetail-title" ref="articleTitle">
-                    哈哈哈哈哈啊哈哈哈哈哈哈哈啊哈哈啊哈哈哈哈哈哈哈啊哈哈
+                    {{articleTitle}}
                 </div>
                 <div class="articleDetail-author">
-                    <i class="el-icon-postcard"></i>
-                    <span>2020-04-22</span>
-                    <span>Liu</span>
+                    <!-- <i class="el-icon-postcard"></i> -->
+                    <span>{{articleDate}}</span>
+                    <el-divider direction="vertical"></el-divider>
+                    <span>{{articleAuthor}}</span>
+                    <el-divider direction="vertical"></el-divider>
+                    <span>浏览次数：{{browseTimes}}</span>
                 </div>
-                <div class="articleDetail-content">
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
-                    <p>测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章测试文章</p>
+                <div class="articleDetail-content" id="test-markdown-view">
+                    <textarea style="display:none;" ref="articleContent"></textarea>
                 </div>
             </div>
             <div class="contentRight">
@@ -41,14 +29,18 @@
     </div>
 </template>
 <script>
+import articleapi from '../api/article.js'
 export default {
     data(){
         return{
-
+            articleTitle:'',
+            articleDate:'',
+            articleAuthor:'',
+            browseTimes:''
         }
     },
     created(){
-
+        this.getArticleDetail()
     },
     mounted(){
         var _height = window.getComputedStyle(this.$refs.articleTitle).height.slice(0,-2)
@@ -57,7 +49,7 @@ export default {
             var _scrollTop = document.getElementsByClassName('articleDetail')[0].scrollTop
             if(_scrollTop > Number(_height) + 15){
                 that.$set(that.$headersObj, 'isShowTitle', true)
-                that.$set(that.$headersObj, 'titleText', 'aaa')
+                that.$set(that.$headersObj, 'titleText', that.articleTitle)
             }else{
                 that.$set(that.$headersObj, 'isShowTitle', false)
                 that.$set(that.$headersObj, 'titleText', '')
@@ -65,6 +57,23 @@ export default {
         },true)
     },
     methods:{
+        getArticleDetail(){
+            var that = this;
+            articleapi.getArticleDetail().then(function(d){
+                console.log(d)
+                if(d.code == 200){
+                    that.articleTitle = d.result[0].title
+                    that.articleDate = new Date(d.result[0].date).toLocaleString()
+                    that.articleAuthor = d.result[0].author
+                    that.browseTimes = d.result[0].browse_times
+                    editormd.markdownToHTML("test-markdown-view", {
+                        markdown : d.result[0].content, // Also, you can dynamic set Markdown text
+                        htmlDecode : true,  // Enable / disable HTML tag encode.
+                        htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+                    });
+                }
+            })
+        }
     }
 }
 </script>
@@ -72,6 +81,7 @@ export default {
     .articleDetail{
         height: calc(100% - 61px);
         overflow: auto;
+       color: #909399;
     }
     .articleDetail-title{
         font-size: 25px;
@@ -81,5 +91,8 @@ export default {
         text-align: center;
         padding: 20px 0;
         font-size: 14px;
+    }
+    .articleDetail-content{
+        color: #909399;
     }
 </style>

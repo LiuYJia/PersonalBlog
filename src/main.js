@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
+import showdown from 'showdown';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+Vue.use(showdown);
 Vue.config.productionTip = false
 Vue.prototype.showTitle = false
 

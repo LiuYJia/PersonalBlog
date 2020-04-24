@@ -28,6 +28,20 @@ export default {
                 reject('error')
             })
         })
+    },
+
+    getRecentArticle:function(){
+        return new Promise(function(resolve,reject){
+            Axios({
+                url:baseUrl + '/homeMsg/getRecentArticle',
+                method:'get',
+                params:'',
+            }).then(function(res){
+                resolve(res.data)
+            }).catch(function(error){
+                reject('error')
+            })
+        })
     }
 
 }

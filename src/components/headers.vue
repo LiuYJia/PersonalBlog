@@ -39,7 +39,7 @@
         </div>
         
         <div :class="{'headers-drop':true,'headers-droppic':$headersObj.isShowTitle}">
-            标题标题标题标题标题标题标题标题标题标
+            {{$headersObj.titleText}}
         </div>
     </div>
 </template>
@@ -59,12 +59,12 @@ export default {
                 this.$router.push({
                     path:'/',
                     query:{}
-                })
+                },function(){})
             }else if(index==2){
                 this.$router.push({
                     path:'/articleDetail',
                     query:{}
-                })
+                },function(){})
             }else if(index==3){
             }else if(index==4){
             }
@@ -97,6 +97,7 @@ export default {
         position: relative;
         top: 0px;
         transition: top .3s;
+        font-size: 20px;
     }
     @media all and (min-width:768px){
         .headers-bigNav{
@@ -127,6 +128,7 @@ export default {
             border: 1px solid #e6e6e6;
             position: fixed;
             right: 5%;
+            z-index: 99;
         }
     }
     .headers-toppic,.headers-droppic{
