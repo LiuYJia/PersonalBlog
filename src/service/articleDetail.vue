@@ -50,7 +50,7 @@ export default {
     mounted(){
         var _height = window.getComputedStyle(this.$refs.articleTitle).height.slice(0,-2)
         var that = this;
-        window.addEventListener('scroll', function(e){
+        document.getElementsByClassName('articleDetail')[0].addEventListener('scroll', function(e){
             var _scrollTop = document.getElementsByClassName('articleDetail')[0].scrollTop
             if(_scrollTop > Number(_height) + 15){
                 that.$set(that.$headersObj, 'isShowTitle', true)

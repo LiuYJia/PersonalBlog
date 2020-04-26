@@ -17,7 +17,6 @@ export default {
     },
 
     saveBoard:function(d){
-        console.log(d)
         return new Promise(function(resolve,reject){
             Axios({
                 url:baseUrl + '/board/saveBoard',

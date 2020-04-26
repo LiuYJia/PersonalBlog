@@ -21,14 +21,14 @@
                     <el-divider></el-divider>
                     <div class="boxContainer">
                         <el-card shadow="hover" v-for="(item,index) in recentArr" :key="index">
-                            <div class="cardLeft">
+                            <div class="cardLeft" @click="goDetail(item)">
                                 <div class="card-title">{{item.title}}</div>
                                 <div class="card-content" ref="cardContent">
                                     {{item.content}}
                                 </div>
                                 <div class="card-date">{{item.date}}</div>
                             </div>
-                            <div class="cardRight">
+                            <div class="cardRight" @click="goDetail(item)">
                                 <img src="../assets/images/login.jpg" alt="" srcset="">
                             </div>
                         </el-card>
@@ -62,7 +62,7 @@
                     <i class="el-icon-chat-line-square blockTitle"></i>留言
                     <el-divider></el-divider>
                     <div class="boxContainer">
-                        <div class="boardBlock-item" v-for="item in boardArr">
+                        <div class="boardBlock-item" v-for="(item,index) in boardArr" :key="index">
                             <div># {{item.name}}<span>{{item.date}}</span></div>
                             <div class="boardBlock-itemtext">{{item.content}}</div>
                         </div>
@@ -201,7 +201,16 @@ export default {
                 }
             })
         },
+        //去留言
         goBoard(){
+            this.$router.push({
+                path:'/board',
+                query:{}
+            },function(){})
+        },
+        //跳转文章详情
+        goDetail(){
+            console.log(888)
             this.$router.push({
                 path:'/articleDetail',
                 query:{}

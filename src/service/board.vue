@@ -7,7 +7,7 @@
                     <el-row :gutter="25">
                         <el-col :span="12">
                             <el-form-item label="称呼" prop="name">
-                                <el-input v-model="ruleForm.name" placeholder="请输入称呼"></el-input>
+                                <el-input v-model="ruleForm.name" placeholder="请输入您的称呼"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
@@ -26,7 +26,7 @@
 
                 <el-divider></el-divider>
 
-                <div class="boardBlock-item" v-for="item in boardArr">
+                <div class="boardBlock-item" v-for="(item,index) in boardArr" :key="index">
                     <div># {{item.name}}<span>{{item.date}}</span></div>
                     <div class="boardBlock-itemtext">{{item.content}}</div>
                 </div>
@@ -80,14 +80,13 @@ export default {
                 callback(new Error('请输入想要说的话'))
                 return;
             }
-            var regEn = /[`!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
-            regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-            if(regEn.test(value) || regCn.test(value)) {
-                callback(new Error('不可输入特殊字符'))
-                return;
-            }else{
-                callback()
-            }
+            callback()
+            // var regEn = /[`!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+            // regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+            // if(regEn.test(value) || regCn.test(value)) {
+            //     callback(new Error('不可输入特殊字符'))
+            //     return;
+            // }
         };
         return{
             ruleForm:{
@@ -143,6 +142,21 @@ export default {
                     console.log(that.ruleForm)
                     boardapi.saveBoard(that.ruleForm).then(function(d){
                         if(d.code==200){
+                            that.$message({
+                                    message: '留言成功',
+                                    type: 'success'
+                                }
+                            );
+                            for(var i in that.ruleForm){
+                                that.ruleForm[i] = ''
+                            }
+                            that.getBoardList()
+                        }else{
+                            that.$message({
+                                    message: '留言失败',
+                                    type: 'error'
+                                }
+                            );
                         }
                     })
                 }
