@@ -26,6 +26,11 @@
                 <div>444</div>
             </div>
         </div>
+        <transition name="el-fade-in">
+            <div class="backTop" v-if="$headersObj.isShowTitle">
+                <i class="el-icon-caret-top" @click="backTop" ></i>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -73,6 +78,9 @@ export default {
                     });
                 }
             })
+        },
+        backTop(){
+            document.getElementsByClassName('articleDetail')[0].scrollTop = 0
         }
     }
 }
@@ -94,5 +102,23 @@ export default {
     }
     .articleDetail-content{
         color: #909399;
+    }
+    .articleDetail .backTop{
+        display: none;
+        position: fixed;
+        right: 5%;
+        bottom: 25px;
+        background-color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: #409eff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        box-shadow: 0 0 6px rgba(0,0,0,.12);
+        cursor: pointer;
+        z-index: 5;
     }
 </style>

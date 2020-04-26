@@ -62,16 +62,11 @@
                     <i class="el-icon-chat-line-square blockTitle"></i>留言
                     <el-divider></el-divider>
                     <div class="boxContainer">
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
-                        <p>#哈哈哈哈</p>
+                        <div class="boardBlock-item" v-for="item in boardArr">
+                            <div># {{item.name}}<span>{{item.date}}</span></div>
+                            <div class="boardBlock-itemtext">{{item.content}}</div>
+                        </div>
+                        <el-button type="primary" icon="el-icon-edit" plain @click="goBoard">留言</el-button>
                     </div>
                 </div>
 
@@ -83,6 +78,7 @@
 <script>
 import footers from '@/components/footers.vue';
 import homeapi from '../api/home.js'
+import boardapi from '../api/board.js'
 export default {
     components:{footers},
     data(){
@@ -98,13 +94,15 @@ export default {
                 email:'',
                 github:''
             },
-            recentArr:[]
+            recentArr:[],
+            boardArr:[]
         }
     },
     created(){
         this.getPersonMsg()
         this.getRecentArticle()
         this.getOneMsg()
+        this.getBoard()
         this.getCity()
     },
     methods:{
@@ -185,6 +183,29 @@ export default {
                 //     }   
                 // })
             })
+        },
+        //留言板
+        getBoard(){
+            var that = this;
+            boardapi.getBoard().then(function(d){
+                console.log(d)
+                if(d.code==200){
+                    that.boardArr = d.result.map(function(e){
+                        var obj = {
+                            name:e.name,
+                            content:e.content,
+                            date:new Date(e.date).toLocaleString()
+                        }
+                        return obj;
+                    })
+                }
+            })
+        },
+        goBoard(){
+            this.$router.push({
+                path:'/articleDetail',
+                query:{}
+            },function(){})
         }
     }
 }
@@ -223,7 +244,7 @@ export default {
         margin-bottom: 10px;
         cursor: pointer;
     }
-    .el-card__body{
+    .home .articleBlock .el-card__body{
         display: flex;
     }
     .home .cardLeft{
@@ -244,6 +265,21 @@ export default {
     .home a{
         text-decoration: none;
         color: #909399;
+    }
+    .boardBlock-item{
+        margin-bottom: 20px;
+    }
+    .boardBlock-item span{
+        font-size: 12px;
+        margin-left: 12px;
+    }
+    .boardBlock-itemtext{
+        border-left: 3px solid #DCDFE6;
+        padding: 0px 10px;
+        margin-top: 10px;
+    }
+    .boardBlock .el-button{
+        width: 100%;
     }
     @media all and (min-width:768px){
         .home .el-carousel__container{
