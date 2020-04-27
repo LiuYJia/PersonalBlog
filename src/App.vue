@@ -2,8 +2,8 @@
     <div id="app" @click.stop="showClickTips">
         <headers />
         <router-view/>
-
-        <div :class="{clickTips:true,clickTipsHide:clickTipsHide}" ref="clickTips"></div>
+        <!-- 点击动画 -->
+        <!-- <div :class="{clickTips:true,clickTipsHide:clickTipsHide}" ref="clickTips"></div> -->
     </div>
 </template>
 <script>
@@ -16,7 +16,7 @@ export default {
             clickTipsHide:false
         }
     },
-    // mounted(){
+    mounted(){
     //     var that = this;
     //     window.addEventListener('click',function(e){
     //         console.log(window.getComputedStyle(that.$refs.clickTips).style)
@@ -25,9 +25,10 @@ export default {
     //         window.getComputedStyle(that.$refs.clickTips).style.left = _left
     //         window.getComputedStyle(that.$refs.clickTips).style.top = _top
     //     },false)
-    // }
+    },
     methods:{
         showClickTips(e){
+            return;
             var that = this;
             var _left = e.pageX
             var _top = e.pageY
