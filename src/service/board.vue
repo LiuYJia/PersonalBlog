@@ -7,17 +7,17 @@
                     <el-row :gutter="25">
                         <el-col :span="12">
                             <el-form-item label="称呼" prop="name">
-                                <el-input v-model="ruleForm.name" placeholder="请输入您的称呼"></el-input>
+                                <el-input v-model="ruleForm.name" placeholder="请输入您的称呼" maxLength="10"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
                             <el-form-item label="邮箱" prop="contact">
-                            <el-input v-model="ruleForm.contact" placeholder="请输入您的邮箱"></el-input>
+                            <el-input v-model="ruleForm.contact" placeholder="请输入您的邮箱"  maxLength="20"></el-input>
                         </el-form-item>
                         </el-col>
                     </el-row>
                     <el-form-item label="内容"  prop="content">
-                        <el-input type="textarea" rows="5" v-model="ruleForm.content"  placeholder="请输入想要说的话"></el-input>
+                        <el-input type="textarea" rows="5" v-model="ruleForm.content"  placeholder="请输入想要说的话"  maxLength="255"></el-input>
                     </el-form-item>
                     <el-form-item class="boardSave">
                         <el-button type="primary" icon="el-icon-circle-check" plain @click="save" size="small">保存</el-button>
@@ -34,7 +34,7 @@
             </div>
             <div class="contentRight">
 
-                <div># Tips</div>
+                <div><i class="el-icon-warning-outline"></i> Tips</div>
                 <el-divider></el-divider>
                 欢迎分享讨论
 
@@ -61,7 +61,6 @@ export default {
             }
         };
         var checkContact= function(rule, value, callback){
-            console.log(value)
             if(!value){
                 callback(new Error('请输入您的邮箱'))
                 return;
@@ -75,7 +74,6 @@ export default {
             }
         };
         var checkContent= function(rule, value, callback){
-            console.log(value)
             if(!value){
                 callback(new Error('请输入想要说的话'))
                 return;
@@ -139,8 +137,14 @@ export default {
                         }
                     );
                 }else{
-                    console.log(that.ruleForm)
+                    var loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
                     boardapi.saveBoard(that.ruleForm).then(function(d){
+                        loading.close()
                         if(d.code==200){
                             that.$message({
                                     message: '留言成功',

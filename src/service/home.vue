@@ -153,7 +153,7 @@ export default {
             var that = this;
             homeapi.getRecentArticle().then(function(d){
                 if(d.code==200){
-                    that.recentArr = d.result.splice(0,4).map(function(el){
+                    that.recentArr = d.result.splice(0,9).map(function(el){
                         var obj = {
                             id: el.id,
                             title: el.title,
@@ -188,7 +188,6 @@ export default {
         getBoard(){
             var that = this;
             boardapi.getBoard().then(function(d){
-                console.log(d)
                 if(d.code==200){
                     that.boardArr = d.result.map(function(e){
                         var obj = {
@@ -209,11 +208,10 @@ export default {
             },function(){})
         },
         //跳转文章详情
-        goDetail(){
-            console.log(888)
+        goDetail(item){
             this.$router.push({
                 path:'/articleDetail',
-                query:{}
+                query:{id:item.id}
             },function(){})
         }
     }

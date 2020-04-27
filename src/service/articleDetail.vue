@@ -2,11 +2,13 @@
     <div class="articleDetail">
         <div class="contentBox">
             <div class="contentLeft">
+
+                <el-page-header @back="goBack" content="文章详情">aaa</el-page-header>
+
                 <div class="articleDetail-title" ref="articleTitle">
                     {{articleTitle}}
                 </div>
                 <div class="articleDetail-author">
-                    <!-- <i class="el-icon-postcard"></i> -->
                     <span>{{articleDate}}</span>
                     <el-divider direction="vertical"></el-divider>
                     <span>{{articleAuthor}}</span>
@@ -18,12 +20,11 @@
                 </div>
             </div>
             <div class="contentRight">
-                <div># 推荐</div>
+                <div><i class="el-icon-star-off"></i> 推荐</div>
                 <el-divider></el-divider>
-                <div>11111</div>
-                <div>222</div>
-                <div>333</div>
-                <div>444</div>
+                <p v-for="item in recommendList">
+                    <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
+                </p>
             </div>
         </div>
         <transition name="el-fade-in">
@@ -41,11 +42,13 @@ export default {
             articleTitle:'',
             articleDate:'',
             articleAuthor:'',
-            browseTimes:''
+            browseTimes:'',
+            recommendList:[]
         }
     },
     created(){
         this.getArticleDetail()
+        this.getRecommendList()
     },
     mounted(){
         var _height = window.getComputedStyle(this.$refs.articleTitle).height.slice(0,-2)
@@ -62,10 +65,39 @@ export default {
         },true)
     },
     methods:{
-        getArticleDetail(){
+        getRecommendList(){
             var that = this;
-            articleapi.getArticleDetail().then(function(d){
-                console.log(d)
+            var data = {
+                isRecommend:true
+            }
+            articleapi.getArticleList(data).then(function(d){
+                if(d.code == 200){
+                    that.recommendList = d.result
+                }
+            })
+        },
+        goBack(){
+            this.$router.push({
+                path:'/articleList',
+                query:{}
+            },function(){})
+        },
+        goDetail(item){
+
+            this.getArticleDetail(item.id)
+
+        },
+        getArticleDetail(id){
+            if(id){
+                var articleId = id
+                document.getElementById('test-markdown-view').innerHTML = ''
+            }else{
+                var articleId = this.$route.query.id
+            }
+            
+            var that = this;
+            
+            articleapi.getArticleDetail(articleId).then(function(d){
                 if(d.code == 200){
                     that.articleTitle = d.result[0].title
                     that.articleDate = new Date(d.result[0].date).toLocaleString()
@@ -89,11 +121,16 @@ export default {
     .articleDetail{
         height: calc(100% - 61px);
         overflow: auto;
-       color: #909399;
+        color: #909399;
+    }
+    .articleDetail .el-page-header__content{
+        color: #909399;
+        font-size: 14px;
     }
     .articleDetail-title{
         font-size: 25px;
         text-align: center;
+        margin-top: 25px;
     }
     .articleDetail-author{
         text-align: center;

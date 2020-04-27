@@ -1,11 +1,11 @@
 import Axios from 'axios'
 import {develop,baseUrl} from '../config'
 export default {
+    accessNum:function(){
 
-    getHeadSort:function(){
         return new Promise(function(resolve,reject){
             Axios({
-                url:baseUrl + '/homeMsg/getArticleSort',
+                url:baseUrl + '/homeMsg/addAccess',
                 method:'get',
                 params:'',
             }).then(function(res){

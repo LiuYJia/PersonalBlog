@@ -14,7 +14,9 @@ Vue.prototype.showTitle = false
 var vm = new Vue({
   data:{
     isShowTitle:false,
-    titleText:''
+    titleText:'',
+    activeTab:'',//记录列表页选中标签
+    activeScrollTop:''//记录滚动条位置
   }
 })
 Vue.prototype.$headersObj = vm
