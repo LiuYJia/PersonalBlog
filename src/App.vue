@@ -16,6 +16,8 @@ export default {
             clickTipsHide:false
         }
     },
+    created(){
+    },
     mounted(){
     //     var that = this;
     //     window.addEventListener('click',function(e){
