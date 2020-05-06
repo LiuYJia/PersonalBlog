@@ -77,10 +77,7 @@ export default {
             })
         },
         goBack(){
-            this.$router.push({
-                path:'/articleList',
-                query:{}
-            },function(){})
+            this.$router.go(-1)
         },
         goDetail(item){
 

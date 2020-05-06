@@ -203,14 +203,14 @@ export default {
         //去留言
         goBoard(){
             this.$router.push({
-                path:'/board',
+                path:'/boardFront',
                 query:{}
             },function(){})
         },
         //跳转文章详情
         goDetail(item){
             this.$router.push({
-                path:'/articleDetail',
+                path:'/articleDetailFront',
                 query:{id:item.id}
             },function(){})
         }

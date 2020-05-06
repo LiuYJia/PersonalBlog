@@ -67,15 +67,13 @@ export default {
                 },function(){})
             }else if(index==2){
                 this.$router.push({
-                    path:'/articleList',
+                    path:'/articleListFront',
                     query:{}
                 },function(){})
             }else if(index == 3){
                 this.$router.push({
-                    path:'/board',
-                    query:{
-                        sort:index
-                    }
+                    path:'/boardFront',
+                    query:{}
                 },function(e){})
             }
         }

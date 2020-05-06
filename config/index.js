@@ -27,7 +27,7 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
+    
     
     /**
      * Source Maps
@@ -55,9 +55,10 @@ module.exports = {
 
     /**
      * Source Maps
+     * 帮助线上调试代码，查看样式
      */
-
-    productionSourceMap: true,
+    
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

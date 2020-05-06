@@ -1,35 +1,36 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/service/home'
-import articleDetail from '@/service/articleDetail'
-import articleList from '@/service/articleList'
-import board from '@/service/board'
+// import home from '@/service/home'
+// import articleDetail from '@/service/articleDetail'
+// import articleList from '@/service/articleList'
+// import board from '@/service/board'
 
 Vue.use(Router)
 
 export default new Router({
+    mode:'history',
     routes:[
         {
             path:'/',
             name:'home',
-            component:home
+            component:resolve=>require(['@/service/home'],resolve)
         },
         {
-            path:'/articleDetail',
+            path:'/articleDetailFront',
             name:'articleDetail',
-            component:articleDetail
+            component:resolve=>require(['@/service/articleDetail'],resolve)
         }
         ,
         {
-            path:'/articleList',
+            path:'/articleListFront',
             name:'articleList',
-            component:articleList
+            component:resolve=>require(['@/service/articleList'],resolve)
         }
         ,
         {
-            path:'/board',
+            path:'/boardFront',
             name:'board',
-            component:board
+            component:resolve=>require(['@/service/board'],resolve)
         }
     ]
 })

@@ -32,11 +32,13 @@
                 </el-pagination>
             </div>
             <div class="contentRight">
-                <div><i class="el-icon-star-off"></i> 推荐</div>
-                <el-divider></el-divider>
-                <p v-for="item in recommendList">
-                    <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
-                </p>
+                <div class="rightLabel">
+                    <div><i class="el-icon-star-off"></i> 推荐</div>
+                    <el-divider></el-divider>
+                    <p v-for="item in recommendList">
+                        <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -137,7 +139,7 @@ export default {
 
             this.$set(this.$headersObj, 'activeTab', this.activeSort)
             this.$router.push({
-                path:'/articleDetail',
+                path:'/articleDetailFront',
                 query:{id:item.id}
             },function(){})
 
@@ -193,5 +195,8 @@ export default {
     }
     .articleList .el-pagination{
         text-align: center;
+    }
+    .rightLabel{
+        position: fixed;
     }
 </style>
