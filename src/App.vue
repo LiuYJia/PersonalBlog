@@ -7,6 +7,7 @@
     </div>
 </template>
 <script>
+import homeapi from './api/home.js'
 import headers from '@/components/headers.vue';
 export default {
     components:{headers},
@@ -17,6 +18,10 @@ export default {
         }
     },
     created(){
+        //访问统计
+        homeapi.historyAccess().then(function(d){
+            
+        })
     },
     mounted(){
     //     var that = this;
