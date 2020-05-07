@@ -202,6 +202,7 @@ export default {
         },
         //去留言
         goBoard(){
+            this.$headersObj.activeIndex = '3'
             this.$router.push({
                 path:'/boardFront',
                 query:{}

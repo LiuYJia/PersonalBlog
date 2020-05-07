@@ -119,4 +119,8 @@ export default {
     ::-webkit-scrollbar-button{
         display: none;
     }
+
+    .editormd-preview-container, .editormd-html-preview{
+        width: auto;
+    }
 </style>

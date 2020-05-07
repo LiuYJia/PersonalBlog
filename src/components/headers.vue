@@ -6,7 +6,7 @@
             </div>
             <div :class="{'headers-bigNav':true,'headers-toppic':$headersObj.isShowTitle}">
                 <el-menu
-                    :default-active="activeIndex"
+                    :default-active="$headersObj.activeIndex"
                     class="el-menu-demo"
                     mode="horizontal"
                     @select="handleSelect"
@@ -22,7 +22,7 @@
                 <el-collapse-transition>
                     <div v-show="showSmallMenu" class="headers-smallMenu">
                         <el-menu
-                            :default-active="activeIndex"
+                            :default-active="$headersObj.activeIndex"
                             class="el-menu-demo"
                             @select="handleSelect"
                             active-text-color="#409EFF">
@@ -45,7 +45,7 @@ import homeapi from '../api/home.js'
 export default {
     data(){
         return{
-            activeIndex:'1',
+            // activeIndex:'1',
             showSmallMenu:false
         }
     },
@@ -53,7 +53,7 @@ export default {
     },
     methods:{
         goHome(){
-            this.activeIndex = '-1'
+            this.$headersObj.activeIndex = '1'
             this.$router.push({
                 path:'/',
                 query:{}

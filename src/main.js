@@ -18,7 +18,8 @@ var vm = new Vue({
     isShowTitle:false,
     titleText:'',
     activeTab:'',//记录列表页选中标签
-    activeScrollTop:''//记录滚动条位置
+    activeScrollTop:'',//记录滚动条位置
+    activeIndex:'1'//头部激活tab
   }
 })
 Vue.prototype.$headersObj = vm
