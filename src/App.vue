@@ -2,8 +2,6 @@
     <div id="app" @click.stop="showClickTips">
         <headers />
         <router-view/>
-        <!-- 点击动画 -->
-        <!-- <div :class="{clickTips:true,clickTipsHide:clickTipsHide}" ref="clickTips"></div> -->
     </div>
 </template>
 <script>
@@ -44,38 +42,18 @@ export default {
                 <div class="heart heart${that.heartindex} heartcolor${index}" style="position:fixed;left:${_left}px;top:${_top}px;"></div>
             `
             $('body').append(_html)
-            that.heartindex++;
             setTimeout(() => {
-                $('body').remove(`.heart${that.heartindex}`)
-            }, 1000);
+                $(`.heart${that.heartindex}`).css({'top':`${_top - 150}px`})
+                setTimeout(()=>{
+                    $(`.heart${that.heartindex}`).remove()
+                    that.heartindex++;
+                },500)
+            }, 0);
         }
     }
 }
 </script>
 <style>
-    .clickTipsHide{
-        /* display: none; */
-        opacity: 0;
-    }
-    .clickTips{
-        position: fixed;
-        background: red;
-        width: 20px;
-        height: 20px;
-        top:100px;
-        left: 50px;
-        z-index: 99999;
-        animation:mymove 5s infinite;
-        animation-iteration-count:1;
-        animation-fill-mode:forwards;
-    }
-    @keyframes mymove
-        {
-            from {opacity:1;}
-            to {
-                opacity:0;
-            }
-        }
     html,body,#app{
         height: 100%;
         font-size: 14px;
@@ -140,11 +118,9 @@ export default {
         width: 20px;
         height: 20px;
         transform: rotate(-45deg);
+        position: relative;
+        transition: top .5s;
     }
-    .heart{
-
-    }
-    
     .heart:before {
         content: "";
         position:absolute;
