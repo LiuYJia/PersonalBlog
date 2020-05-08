@@ -5,10 +5,6 @@
 
                 <el-tabs v-model="activeSort" type="card" @tab-click="handleClick">
                     <el-tab-pane :label="item.sort" :name="String(item.id)" v-for="(item,index) in sortArr" :key="index"></el-tab-pane>
-                    <!-- <el-tab-pane label="用户管理" name="first"></el-tab-pane>
-                    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
-                    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
-                    <el-tab-pane label="定时任务补偿" name="fourth"></el-tab-pane> -->
                 </el-tabs>
 
                 <el-card shadow="hover" v-for="(item,index) in articleArr" :key="index">
@@ -197,6 +193,6 @@ export default {
         text-align: center;
     }
     .rightLabel{
-        position: fixed;
+        /* position: fixed; */
     }
 </style>

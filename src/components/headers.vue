@@ -14,7 +14,6 @@
                     <el-menu-item index="1">首页</el-menu-item>
                     <el-menu-item index="2">文章目录</el-menu-item>
                     <el-menu-item index="3">留言板</el-menu-item>
-                    <!-- <el-menu-item v-for="(item,idx) in headSort" :index="String(item.id)" :key="idx">{{item.sort}}</el-menu-item> -->
                 </el-menu>
             </div>
             <div  :class="{'headers-smallNav':true,'headers-toppic':$headersObj.isShowTitle}">
@@ -61,16 +60,19 @@ export default {
         },
         handleSelect(index){
             if(index==1){
+                this.$headersObj.activeIndex = '1'
                 this.$router.push({
                     path:'/',
                     query:{}
                 },function(){})
             }else if(index==2){
+                this.$headersObj.activeIndex = '2'
                 this.$router.push({
                     path:'/articleListFront',
                     query:{}
                 },function(){})
             }else if(index == 3){
+                this.$headersObj.activeIndex = '3'
                 this.$router.push({
                     path:'/boardFront',
                     query:{}
@@ -138,6 +140,9 @@ export default {
             position: fixed;
             right: 5%;
             z-index: 99;
+        }
+        .headers-drop{
+            font-size: 16px;
         }
     }
     .headers-toppic,.headers-droppic{

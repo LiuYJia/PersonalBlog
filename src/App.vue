@@ -14,34 +14,40 @@ export default {
     name: 'App',
     data(){
         return{
+            heartindex:0,
             clickTipsHide:false
         }
     },
     created(){
         //访问统计
-        homeapi.historyAccess().then(function(d){
-            
-        })
+        var date = new Date().toLocaleDateString()
+        var obj = {
+            date:date
+        }
+        homeapi.addHistoryAccess(obj).then(function(d){})
     },
-    mounted(){
-    //     var that = this;
-    //     window.addEventListener('click',function(e){
-    //         console.log(window.getComputedStyle(that.$refs.clickTips).style)
-    //         var _left = e.pageX
-    //         var _top = e.pageY
-    //         window.getComputedStyle(that.$refs.clickTips).style.left = _left
-    //         window.getComputedStyle(that.$refs.clickTips).style.top = _top
-    //     },false)
-    },
+    mounted(){},
     methods:{
+        //生成随机数
+        RandomNumBoth(Min,Max){
+            var Range = Max - Min;
+            var Rand = Math.random();
+            var num = Min + Math.round(Rand * Range); //四舍五入
+            return num;
+        },
         showClickTips(e){
-            return;
             var that = this;
             var _left = e.pageX
             var _top = e.pageY
-            document.getElementsByClassName('clickTips')[0].style.left = _left + 'px'
-            document.getElementsByClassName('clickTips')[0].style.top = _top + 'px'
-            document.getElementsByClassName('clickTips')[0].style.opacity = 1
+            var index = that.RandomNumBoth(1,5)
+            var _html = `
+                <div class="heart heart${that.heartindex} heartcolor${index}" style="position:fixed;left:${_left}px;top:${_top}px;"></div>
+            `
+            $('body').append(_html)
+            that.heartindex++;
+            setTimeout(() => {
+                $('body').remove(`.heart${that.heartindex}`)
+            }, 1000);
         }
     }
 }
@@ -127,5 +133,79 @@ export default {
 
     .editormd-preview-container, .editormd-html-preview{
         width: auto;
+    }
+
+    .heart{
+        z-index: 999;
+        width: 20px;
+        height: 20px;
+        transform: rotate(-45deg);
+    }
+    .heart{
+
+    }
+    
+    .heart:before {
+        content: "";
+        position:absolute;
+        top: -10px;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    .heart:after{
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    .heartcolor1{
+        background: red;
+    }
+    .heartcolor1:before{
+        background: red;
+    }
+    .heartcolor1:after{
+        background: red;
+    }
+    .heartcolor2{
+        background: plum;
+    }
+    .heartcolor2:before{
+        background: plum;
+    }
+    .heartcolor2:after{
+        background: plum;
+    }
+    .heartcolor3{
+        background: tomato;
+    }
+    .heartcolor3:before{
+        background: tomato;
+    }
+    .heartcolor3:after{
+        background: tomato;
+    }
+    .heartcolor4{
+        background: rgb(64, 158, 255);
+    }
+    .heartcolor4:before{
+        background: rgb(64, 158, 255);
+    }
+    .heartcolor4:after{
+        background: rgb(64, 158, 255);
+    }
+    .heartcolor5{
+        background: rgb(243, 7, 211);
+    }
+    .heartcolor5:before{
+        background: rgb(243, 7, 211);
+    }
+    .heartcolor5:after{
+        background: rgb(243, 7, 211);
     }
 </style>

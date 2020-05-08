@@ -155,4 +155,9 @@ export default {
         cursor: pointer;
         z-index: 5;
     }
+    @media all and (max-width:768px){
+        .articleDetail-title{
+            font-size: 20px;
+        }
+    }
 </style>

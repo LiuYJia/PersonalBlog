@@ -1,13 +1,12 @@
 import Axios from 'axios'
 import {develop,baseUrl} from '../config'
 export default {
-    historyAccess:function(){
-
+    addHistoryAccess:function(date){
         return new Promise(function(resolve,reject){
             Axios({
-                url:baseUrl + '/homeMsg/historyAccess',
+                url:baseUrl + '/homeMsg/addHistoryAccess',
                 method:'get',
-                params:'',
+                params:date,
             }).then(function(res){
                 resolve(res.data)
             }).catch(function(error){
