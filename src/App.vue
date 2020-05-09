@@ -40,15 +40,21 @@ export default {
             var index = that.RandomNumBoth(1,5)
             var _html = `
                 <div class="heart heart${that.heartindex} heartcolor${index}" style="position:fixed;left:${_left}px;top:${_top}px;"></div>
-            `
+            `;
             $('body').append(_html)
+
             setTimeout(() => {
-                $(`.heart${that.heartindex}`).css({'top':`${_top - 150}px`})
-                setTimeout(()=>{
-                    $(`.heart${that.heartindex}`).remove()
+                $(`.heart${that.heartindex}`).css({'top':`${_top - 180}px`,'opacity':'0.2'})
+                return (function(){
+                    //保存私有变量
+                    var _idx = that.heartindex
+                    setTimeout(()=>{
+                        $(`.heart${_idx}`).remove()
+                    },800)
                     that.heartindex++;
-                },500)
+                })()
             }, 0);
+
         }
     }
 }
@@ -119,7 +125,8 @@ export default {
         height: 20px;
         transform: rotate(-45deg);
         position: relative;
-        transition: top .5s;
+        opacity:1;
+        transition: top .8s,opacity .8s;
     }
     .heart:before {
         content: "";
