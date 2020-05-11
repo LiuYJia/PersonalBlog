@@ -2,7 +2,7 @@
     <div class="headers">
         <div class="headers-top">
             <div :class="{'headers-logo':true,'headers-toppic':$headersObj.isShowTitle}" @click="goHome()">
-                Blog
+                <img src="../assets/images/logo2.png" alt="">
             </div>
             <div :class="{'headers-bigNav':true,'headers-toppic':$headersObj.isShowTitle}">
                 <el-menu
@@ -100,6 +100,10 @@ export default {
         transition: top .5s;
         top: 0;
         cursor: pointer;
+    }
+    .headers-logo img{
+        height: 46px;
+        margin-top: 7px;
     }
     .headers-drop{
         width: 90%;
