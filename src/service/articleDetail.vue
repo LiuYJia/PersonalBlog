@@ -23,7 +23,7 @@
                 <div class="rightLabel">
                     <div><i class="el-icon-star-off"></i> 推荐</div>
                     <el-divider></el-divider>
-                    <p v-for="item in recommendList">
+                    <p v-for="(item,index) in recommendList" :key="index">
                         <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
                     </p>
                 </div>
@@ -37,6 +37,7 @@
     </div>
 </template>
 <script>
+import commonMethods from '@/methods/methods.js'
 import articleapi from '../api/article.js'
 export default {
     data(){
@@ -99,7 +100,7 @@ export default {
             articleapi.getArticleDetail(articleId).then(function(d){
                 if(d.code == 200){
                     that.articleTitle = d.result[0].title
-                    that.articleDate = new Date(d.result[0].date).toLocaleString()
+                    that.articleDate = commonMethods.changeTime(d.result[0].date)
                     that.articleAuthor = d.result[0].author
                     that.browseTimes = d.result[0].browse_times
                     editormd.markdownToHTML("test-markdown-view", {

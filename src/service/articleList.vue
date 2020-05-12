@@ -31,7 +31,7 @@
                 <div class="rightLabel">
                     <div><i class="el-icon-star-off"></i> 推荐</div>
                     <el-divider></el-divider>
-                    <p v-for="item in recommendList">
+                    <p v-for="(item,index) in recommendList" :key="index">
                         <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
                     </p>
                 </div>
@@ -92,7 +92,7 @@ export default {
                             title: el.title,
                             content:el.content.replace(/[^\u4e00-\u9fa5]/gi,"").slice(0,50)+'……',
                             // content: el.content,
-                            date:commonMethods.UTCToBeijing(el.date),
+                            date:commonMethods.changeTime(el.date),
                             author: el.author,
                             browse_times: el.browse_times,
                             sort_id: el.sort_id,
@@ -169,7 +169,7 @@ export default {
         font-size: 18px;
     }
     .articleList .card-content{
-        min-height: calc(100% - 65px);
+        /* min-height: calc(100% - 65px); */
     }
     .articleList .card-date{
         font-size: 12px;

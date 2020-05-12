@@ -160,7 +160,7 @@ export default {
                             title: el.title,
                             content:el.content.replace(/[^\u4e00-\u9fa5]/gi,"").slice(0,50)+'……',
                             // content: el.content,
-                            date:commonMethods.UTCToBeijing(el.date),
+                            date:commonMethods.changeTime(el.date),
                             author: el.author,
                             browse_times: el.browse_times,
                             sort_id: el.sort_id,
@@ -194,7 +194,7 @@ export default {
                         var obj = {
                             name:e.name,
                             content:e.content,
-                            date:new Date(e.date).toLocaleString()
+                            date:commonMethods.changeTime(e.date)
                         }
                         return obj;
                     })
@@ -264,7 +264,7 @@ export default {
         font-weight: bold;
     }
     .home .card-content{
-        min-height: calc(100% - 65px);
+        /* min-height: calc(100% - 65px); */
     }
     .home .card-date{
         font-size: 12px;

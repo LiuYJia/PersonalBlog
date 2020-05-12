@@ -43,6 +43,7 @@
     </div>
 </template>
 <script>
+import commonMethods from '@/methods/methods.js'
 import boardapi from '../api/board.js'
 export default {
     data(){
@@ -120,7 +121,7 @@ export default {
                         var obj = {
                             name:e.name,
                             content:e.content,
-                            date:new Date(e.date).toLocaleString()
+                            date:commonMethods.changeTime(e.date)
                         }
                         return obj;
                     })
