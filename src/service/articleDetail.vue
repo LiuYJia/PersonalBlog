@@ -10,8 +10,8 @@
                 </div>
                 <div class="articleDetail-author">
                     <span>{{articleDate}}</span>
-                    <el-divider direction="vertical"></el-divider>
-                    <span>{{articleAuthor}}</span>
+                    <!-- <el-divider direction="vertical"></el-divider>
+                    <span>{{articleAuthor}}</span> -->
                     <el-divider direction="vertical"></el-divider>
                     <span>浏览次数：{{browseTimes}}</span>
                 </div>
@@ -20,11 +20,13 @@
                 </div>
             </div>
             <div class="contentRight">
-                <div><i class="el-icon-star-off"></i> 推荐</div>
-                <el-divider></el-divider>
-                <p v-for="item in recommendList">
-                    <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
-                </p>
+                <div class="rightLabel">
+                    <div><i class="el-icon-star-off"></i> 推荐</div>
+                    <el-divider></el-divider>
+                    <p v-for="item in recommendList">
+                        <el-link type="info" @click="goDetail(item)">{{item.title}}</el-link>
+                    </p>
+                </div>
             </div>
         </div>
         <transition name="el-fade-in">
@@ -160,4 +162,10 @@ export default {
             font-size: 20px;
         }
     }
+    @media all and (min-width:768px){
+        .articleDetail .rightLabel{
+            position: fixed;
+        }
+    }
+    
 </style>

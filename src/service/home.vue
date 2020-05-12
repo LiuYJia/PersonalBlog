@@ -28,9 +28,9 @@
                                 </div>
                                 <div class="card-date">{{item.date}}</div>
                             </div>
-                            <div class="cardRight" @click="goDetail(item)">
+                            <!-- <div class="cardRight" @click="goDetail(item)">
                                 <img src="../assets/images/login.jpg" alt="" srcset="">
-                            </div>
+                            </div> -->
                         </el-card>
                     </div>
                 </div>
@@ -76,6 +76,7 @@
     </div>
 </template>
 <script>
+import commonMethods from '@/methods/methods.js'
 import footers from '@/components/footers.vue';
 import homeapi from '../api/home.js'
 import boardapi from '../api/board.js'
@@ -159,7 +160,7 @@ export default {
                             title: el.title,
                             content:el.content.replace(/[^\u4e00-\u9fa5]/gi,"").slice(0,50)+'……',
                             // content: el.content,
-                            date: new Date(el.date).toLocaleString(),
+                            date:commonMethods.UTCToBeijing(el.date),
                             author: el.author,
                             browse_times: el.browse_times,
                             sort_id: el.sort_id,
@@ -256,10 +257,11 @@ export default {
         display: flex;
     }
     .home .cardLeft{
-        padding-right: 10px;
+        /* padding-right: 10px; */
     }
     .home .card-title{
         font-size: 18px;
+        font-weight: bold;
     }
     .home .card-content{
         min-height: calc(100% - 65px);
