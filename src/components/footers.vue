@@ -1,6 +1,8 @@
 <template>
     <div class="footers">
-        这里是底部
+        <span>刘什么佳的垃圾箱</span>
+        <el-divider direction="vertical"></el-divider> 
+        <a href="http://www.beian.miit.gov.cn" target="_blank">京ICP备20017306号</a>
     </div>
 </template>
 <script>
